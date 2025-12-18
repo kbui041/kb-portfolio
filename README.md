@@ -1,6 +1,6 @@
 # Portfolio
 
-Personal website for Kameron Bui, a Junior Informatics student at the University of Washington. 
+Personal website for Kameron Bui, a junior Informatics student at the University of Washington.
 
 ## Built With
 
