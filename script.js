@@ -33,7 +33,7 @@ function typeText() {
     if (!isDeleting && charIndex === currentPhrase.length) {
         setTimeout(() => {
             isDeleting = true;
-        }, 2000); // Pause before deleting
+        }, 2000);
     }
     
     // When done deleting
