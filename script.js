@@ -76,3 +76,50 @@ darkModeToggle.addEventListener('click', () => {
         localStorage.setItem('darkMode', 'disabled');
     }
 });
+
+// Smooth Cursor Trail Effect
+let lastTime = 0;
+const throttleDelay = 5; // Milliseconds between trail dots
+
+document.addEventListener('mousemove', (e) => {
+    const now = Date.now();
+    
+    // Throttle to make it smoother
+    if (now - lastTime < throttleDelay) return;
+    lastTime = now;
+    
+    const trail = document.createElement('div');
+    trail.className = 'cursor-trail';
+    trail.style.left = e.clientX + 'px';
+    trail.style.top = e.clientY + 'px';
+    document.body.appendChild(trail);
+    
+    // Smooth fade out
+    setTimeout(() => {
+        trail.classList.add('fade');
+    }, 10);
+    
+    // Remove after animation
+    setTimeout(() => {
+        trail.remove();
+    }, 600);
+});
+
+const backToTopButton = document.getElementById('backToTop');
+
+// Show button when scrolling down
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+        backToTopButton.classList.add('show');
+    } else {
+        backToTopButton.classList.remove('show');
+    }
+});
+
+// Scroll to top when clicked
+backToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
