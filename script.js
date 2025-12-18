@@ -1,7 +1,7 @@
 // Rotating Typing Animation
 const phrases = [
     "learning as i go",
-    "traveling for good matcha :)",
+    "traveling for matcha :)",
     "exploring new places",
     "ranking up on beli",
     "figuring it out",
