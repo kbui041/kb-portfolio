@@ -1,10 +1,10 @@
 // Rotating Typing Animation
 const phrases = [
-    "learning a little more each day",
-    "traveling often, always in search of good matcha :)",
-    "exploring new places whenever i can",
-    "trying new restaurants while climbing the beli rankings",
-    "figuring things out as i go"
+    "learning as i go",
+    "traveling for good matcha :)",
+    "exploring new places",
+    "ranking up on beli",
+    "figuring it out",
 ];
 
 const typedTextElement = document.getElementById('typed-text');

@@ -409,3 +409,16 @@ body.dark-mode .spotify-card {
 body.dark-mode .spotify-card h5 {
     color: #e6edf3 !important;
 }
+.hover-card {
+    transition: all 0.3s ease;
+}
+
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark mode hover */
+body.dark-mode .hover-card:hover {
+    box-shadow: 0 8px 20px rgba(88, 166, 255, 0.2);
+}
