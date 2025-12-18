@@ -381,3 +381,31 @@ body.dark-mode .back-to-top:hover {
 .fade-in:nth-child(4) { transition-delay: 0.4s; }
 .fade-in:nth-child(5) { transition-delay: 0.5s; }
 .fade-in:nth-child(6) { transition-delay: 0.6s; }
+
+/* Spotify Card */
+.spotify-card {
+    transition: all 0.3s ease;
+}
+
+.spotify-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.spotify-card img {
+    transition: transform 0.3s ease;
+}
+
+.spotify-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Dark mode */
+body.dark-mode .spotify-card {
+    background-color: #161b22 !important;
+    border-color: #30363d !important;
+}
+
+body.dark-mode .spotify-card h5 {
+    color: #e6edf3 !important;
+}
