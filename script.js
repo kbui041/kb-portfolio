@@ -1,3 +1,55 @@
+// Rotating Typing Animation
+const phrases = [
+    "learning a little more each day",
+    "traveling often, always in search of good matcha :)",
+    "exploring new places whenever i can",
+    "trying new restaurants while climbing the beli rankings",
+    "figuring things out as i go"
+];
+
+const typedTextElement = document.getElementById('typed-text');
+const cursorElement = document.querySelector('.cursor');
+let phraseIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let typingSpeed = 80;
+
+function typeText() {
+    const currentPhrase = phrases[phraseIndex];
+    
+    if (isDeleting) {
+        // Delete characters
+        typedTextElement.textContent = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+        typingSpeed = 40;
+    } else {
+        // Type characters
+        typedTextElement.textContent = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+        typingSpeed = 80;
+    }
+    
+    // When done typing
+    if (!isDeleting && charIndex === currentPhrase.length) {
+        setTimeout(() => {
+            isDeleting = true;
+        }, 2000); // Pause before deleting
+    }
+    
+    // When done deleting
+    if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length; // Next phrase
+    }
+    
+    setTimeout(typeText, typingSpeed);
+}
+
+// Start typing animation
+window.addEventListener('load', () => {
+    setTimeout(typeText, 500);
+});
+
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
