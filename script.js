@@ -127,6 +127,11 @@ darkModeToggle.addEventListener('click', () => {
         darkModeIcon.classList.add('bi-moon-fill');
         localStorage.setItem('darkMode', 'disabled');
     }
+    
+    // Recreate charts with updated colors
+    setTimeout(() => {
+        createSkillsCharts();
+    }, 50);
 });
 
 // Smooth Cursor Trail Effect
@@ -195,3 +200,157 @@ const observer = new IntersectionObserver((entries) => {
 // Observe all elements with animation classes
 const fadeElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in');
 fadeElements.forEach(el => observer.observe(el));
+
+// Skills Data Visualization
+let radarChart = null;
+let barChart = null;
+
+function createSkillsCharts() {
+    // Check if Chart.js is loaded
+    if (typeof Chart === 'undefined') {
+        console.error('Chart.js not loaded');
+        return;
+    }
+
+    // Detect dark mode
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    const textColor = isDarkMode ? '#e6edf3' : '#666666';
+    const gridColor = isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+
+    // Destroy existing charts if they exist
+    if (radarChart) {
+        radarChart.destroy();
+    }
+    if (barChart) {
+        barChart.destroy();
+    }
+
+    // Radar Chart - Technical Skills
+    const radarCtx = document.getElementById('skillsRadarChart');
+    if (radarCtx) {
+        radarChart = new Chart(radarCtx, {
+            type: 'radar',
+            data: {
+                labels: ['python', 'javascript', 'sql', 'data analysis', 'ux design', 'web development'],
+                datasets: [{
+                    label: 'proficiency level',
+                    data: [85, 80, 85, 90, 85, 80],
+                    backgroundColor: 'rgba(13, 110, 253, 0.2)',
+                    borderColor: 'rgba(13, 110, 253, 1)',
+                    borderWidth: 2,
+                    pointBackgroundColor: 'rgba(13, 110, 253, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(13, 110, 253, 1)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: {
+                            color: gridColor
+                        },
+                        angleLines: {
+                            color: gridColor
+                        },
+                        ticks: {
+                            stepSize: 20,
+                            color: textColor,
+                            backdropColor: 'transparent',
+                            font: {
+                                size: 14
+                            }
+                        },
+                        pointLabels: {
+                            color: textColor,
+                            font: {
+                                size: 14
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    }
+
+    // Bar Chart - Tools & Frameworks
+    const barCtx = document.getElementById('toolsBarChart');
+    if (barCtx) {
+        barChart = new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: ['react', 'django', 'figma', 'firebase', 'tableau', 'github'],
+                datasets: [{
+                    label: 'experience (months)',
+                    data: [18, 12, 24, 15, 18, 30],
+                    backgroundColor: [
+                        'rgba(13, 110, 253, 0.8)',
+                        'rgba(13, 202, 240, 0.8)',
+                        'rgba(111, 66, 193, 0.8)',
+                        'rgba(255, 193, 7, 0.8)',
+                        'rgba(220, 53, 69, 0.8)',
+                        'rgba(25, 135, 84, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(13, 110, 253, 1)',
+                        'rgba(13, 202, 240, 1)',
+                        'rgba(111, 66, 193, 1)',
+                        'rgba(255, 193, 7, 1)',
+                        'rgba(220, 53, 69, 1)',
+                        'rgba(25, 135, 84, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: gridColor
+                        },
+                        ticks: {
+                            stepSize: 6,
+                            color: textColor,
+                            font: {
+                                size: 14
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: gridColor
+                        },
+                        ticks: {
+                            color: textColor,
+                            font: {
+                                size: 13
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    }
+}
+
+// Create charts when page loads
+window.addEventListener('load', () => {
+    setTimeout(createSkillsCharts, 100);
+});
